@@ -1,0 +1,39 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  background-color: #aeaeae;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  padding: 16px;
+}
+
+body {
+  display: flex;
+  min-width: 768px;
+  height: 100vh;
+  min-height: 600px;
+}
+
+.triangle-arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 0 6px 12px;
+  border-color: transparent transparent transparent currentColor;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease-in-out;
+}
+
+.triangle-arrow.expanded {
+  transform: rotate(90deg);
+}
