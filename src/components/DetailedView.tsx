@@ -2,7 +2,11 @@ import { memo, useEffect, useMemo, useRef } from 'react';
 
 import { useSelectedStore } from '@/store/store.ts';
 
-const MemoizedDetailedView = memo(function DetailedView({ className }: { className: string }) {
+type DetailedViewProps = {
+  className: string;
+}
+
+const MemoizedDetailedView = memo(function DetailedView({ className }: DetailedViewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const selected = useSelectedStore(state => state.selected);
   const printedValue = useMemo(

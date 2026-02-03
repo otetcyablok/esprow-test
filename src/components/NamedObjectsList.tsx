@@ -1,9 +1,16 @@
-import { memo, type ReactElement, useState } from 'react';
+import { memo, useState } from 'react';
 
 import type { AwaitedData } from '@/types/awaited-data.ts';
 import { useSelectedStore } from '@/store/store.ts';
 
-const MemoizedListItem = memo(function ListItem({ data }: { data: AwaitedData }) {
+type ListItemProps = {
+  data: AwaitedData;
+}
+type NamedObjectsListProps = {
+  data: AwaitedData[];
+}
+
+const MemoizedListItem = memo(function ListItem({ data }: ListItemProps) {
   const [isExpanded, setExpanded] = useState(false);
   const toggleExpanded = () => setExpanded(!isExpanded);
 
@@ -16,10 +23,12 @@ const MemoizedListItem = memo(function ListItem({ data }: { data: AwaitedData })
   return (
     <li>
       <div className="flex items-center gap-2">
-        {hasChildren ? <div
-          className={`inline-block triangle-arrow cursor-pointer ${isExpanded ? 'expanded' : ''}`}
-          onClick={toggleExpanded}
-        /> : <div className="w-4" />}
+        {hasChildren
+          ? <div
+            className={`inline-block triangle-arrow cursor-pointer ${isExpanded ? 'expanded' : ''}`}
+            onClick={toggleExpanded}
+          />
+          : <div className="w-4" />}
 
         <div
           className={`cursor-pointer transition-colors ${isSelected ? 'text-amber-200' : ''}`}
@@ -36,10 +45,12 @@ const MemoizedListItem = memo(function ListItem({ data }: { data: AwaitedData })
   );
 });
 
-const MemoizedNamedObjectsList = memo(function NamedObjectsList({ data }: { data: AwaitedData[] }): ReactElement {
-  return <ul className="list-triangle">
-    {data?.map((data) => <MemoizedListItem key={data.name} data={data} />)}
-  </ul>;
+const MemoizedNamedObjectsList = memo(function NamedObjectsList({ data }: NamedObjectsListProps) {
+  return (
+    <ul className="list-triangle">
+      {data?.map((data) => <MemoizedListItem key={data.name} data={data} />)}
+    </ul>
+  );
 });
 
 export default MemoizedNamedObjectsList;
