@@ -20,6 +20,7 @@ const MemoizedDetailedView = memo(function DetailedView({ className }: DetailedV
 
   return (
     <div ref={containerRef} className={`${className} whitespace-pre-wrap`}>
+      {/* No virtual scroll because the app behaved smoothly even without it — tested on json-files over 40 000+ lines */}
       {printedValue || <i>Select an item in the left panel</i>}
     </div>
   );
