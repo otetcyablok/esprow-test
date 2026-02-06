@@ -1,0 +1,42 @@
+[
+  {
+    "_id": "698474ec850d8d44f68b2f6d",
+    "index": 0,
+    "guid": "dbd65916-9bd3-4995-8fd2-00e8042ebd48",
+    "isActive": false,
+    "balance": "$1,555.19",
+    "picture": "http://placehold.it/32x32",
+    "age": 30,
+    "eyeColor": "brown",
+    "name": "Lee Lester",
+    "gender": "female",
+    "company": "LIQUIDOC",
+    "email": "leelester@liquidoc.com",
+    "phone": "+1 (868) 589-3789",
+    "address": "709 Love Lane, Dyckesville, Palau, 5312",
+    "about": "Commodo proident fugiat cupidatat dolor velit enim aliquip. Ullamco Lorem dolore ad eu veniam qui minim adipisicing nisi fugiat. Commodo laboris minim aliquip commodo culpa velit cupidatat enim velit minim velit velit. Sit aliquip id fugiat fugiat in est sint ullamco consequat eiusmod laborum id. Sint reprehenderit quis quis deserunt veniam occaecat ullamco consectetur sit mollit ad ullamco velit. Qui occaecat sint qui cillum ut reprehenderit cupidatat dolor. Sunt eiusmod aliquip pariatur proident laboris nostrud eiusmod.\r\n",
+    "registered": "2021-06-15T09:43:08 -03:00",
+    "latitude": 58.133806,
+    "longitude": -40.38985
+  },
+  {
+    "_id": "698474ec021c04879c567d2d",
+    "index": 1,
+    "guid": "900e44be-ce9d-449a-abb9-9d49a33ed90d",
+    "isActive": true,
+    "balance": "$1,890.92",
+    "picture": "http://placehold.it/32x32",
+    "age": 34,
+    "eyeColor": "green",
+    "name": "Meghan Dunn",
+    "gender": "female",
+    "company": "CUIZINE",
+    "email": "meghandunn@cuizine.com",
+    "phone": "+1 (800) 450-2005",
+    "address": "918 Narrows Avenue, Richville, Oregon, 528",
+    "about": "Excepteur amet ad elit minim sit non eu irure. Duis nostrud nisi in laborum nulla eu ex laborum nostrud excepteur adipisicing consequat. Est id et est dolore aute consequat sint aute laborum aliquip irure labore ut nulla. Ipsum dolore ipsum ullamco velit excepteur occaecat.\r\n",
+    "registered": "2025-04-01T11:54:13 -03:00",
+    "latitude": 50.893856,
+    "longitude": 19.47528
+  }
+]

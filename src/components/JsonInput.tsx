@@ -2,11 +2,10 @@ import { type ChangeEvent, useCallback } from 'react';
 
 import type { AwaitedData } from '@/types/awaited-data.ts';
 import readJsonFile from '@/helpers/read-json-file.ts';
-import { useDataStore, useSelectedStore } from '@/store/store.ts';
+import { useDataStore } from '@/store/store.ts';
 
 function JsonInput() {
   const setData = useDataStore(state => state.setData);
-  const resetSelected = useSelectedStore(state => state.resetSelected);
 
   const handleFileUpload = useCallback(async (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files?.length) {
@@ -14,10 +13,9 @@ function JsonInput() {
 
       if (!jsonData) return;
 
-      resetSelected();
       setData(jsonData);
     }
-  }, [resetSelected, setData]);
+  }, [setData]);
 
   return (
     <input

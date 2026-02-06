@@ -18,5 +18,11 @@ Run following commands in project's main directory:
 ## How to use
 
 1. Input `.json` file (pregenerated example files you can find in `./data` directory);
-2. To select or deselect item click on its name;
-3. To open list of item's children click on triangle arrow.
+2. ?;
+3. ?.
+
+### TODOs:
+
+1. Self-made virtual scroll;
+2. Editing in modal;
+3. Order the mess.
