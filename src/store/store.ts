@@ -5,6 +5,9 @@ import type { CompoundKey } from '@/types/structure.ts';
 
 interface DataState {
   data: AwaitedData[] | null;
+  currentEditedKey: CompoundKey | null;
+  setCurrentEditedKey: (key: CompoundKey) => void;
+  resetCurrentEditedKey: () => void;
   changedData: Record<CompoundKey, PossibleValue>
   setData: (data: AwaitedData[]) => void;
   resetData: () => void;
@@ -16,6 +19,9 @@ interface DataState {
 const useDataStore = create<DataState>()((set, get) => ({
   data: null,
   changedData: {},
+  currentEditedKey: null,
+  setCurrentEditedKey: (key: CompoundKey) => set(() => ({ currentEditedKey: key })),
+  resetCurrentEditedKey: () => set(() => ({ currentEditedKey: null })),
   setData: (data: AwaitedData[]) => set(() => ({ data })),
   resetData: () => set(() => ({ data: null })),
   getSpecificValue: (compoundKey: CompoundKey) => {

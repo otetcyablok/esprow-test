@@ -24,5 +24,4 @@ Run following commands in project's main directory:
 ### TODOs:
 
 1. Self-made virtual scroll;
-2. Editing in modal;
-3. Order the mess: TODOs in code.
+2. Order the mess: TODOs in code.

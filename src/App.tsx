@@ -1,6 +1,7 @@
 import DetailedView from '@/components/DetailedView.tsx';
 import DownloadButton from '@/components/DownloadButton.tsx';
 import JsonInput from '@/components/JsonInput.tsx';
+import ModalEdit from '@/components/ModalEdit.tsx';
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
       <div className="flex justify-center mt-2">
         <DownloadButton />
       </div>
+
+      <ModalEdit />
     </div>
   )
 }
