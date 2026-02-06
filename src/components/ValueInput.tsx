@@ -71,7 +71,7 @@ const ValueInput = forwardRef<ValueInputHandle, ValueInputProps>(function ValueI
           className="input w-full"
         />
       );
-    case 'string':
+    default:
       return (
         <textarea
           name="edit-value"
@@ -83,8 +83,6 @@ const ValueInput = forwardRef<ValueInputHandle, ValueInputProps>(function ValueI
           className="textarea w-full min-h-50"
         />
       );
-    default:
-      throw Error(`unexpected type of \`value\`: ${typeof initialValue}`);
   }
 });
 
