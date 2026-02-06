@@ -1,9 +1,11 @@
+type PossibleValue = string | number | boolean;
+
 interface AwaitedData {
-  name: string;
-  children?: AwaitedData[];
-  [key: string]: unknown;
+  _id: string;
+  [key: string]: PossibleValue;
 }
 
 export type {
   AwaitedData,
+  PossibleValue,
 };

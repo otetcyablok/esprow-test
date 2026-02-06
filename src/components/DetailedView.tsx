@@ -1,29 +1,49 @@
-import { memo, useEffect, useMemo, useRef } from 'react';
+import { useRef } from 'react';
+import { useVirtualizer } from '@tanstack/react-virtual';
 
-import { useSelectedStore } from '@/store/store.ts';
+import createStructure from '@/helpers/create-structure.ts';
+import { useDataStore } from '@/store/store.ts';
 
-type DetailedViewProps = {
-  className: string;
-}
+import JsonLine from '@/components/JsonLine.tsx';
 
-const MemoizedDetailedView = memo(function DetailedView({ className }: DetailedViewProps) {
+function DetailedView() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const selected = useSelectedStore(state => state.selected);
-  const printedValue = useMemo(
-    () => selected ? JSON.stringify(selected, null, 2) : null,
-    [selected]
-  );
+  const data = useDataStore(state => state.data);
 
-  useEffect(() => {
-    containerRef.current?.scrollTo(0, 0);
-  }, [selected]);
+  const structure = createStructure(data);
+
+  const virtualizer = useVirtualizer({
+    count: structure.length,
+    getScrollElement: () => containerRef.current,
+    estimateSize: () => 24,
+    measureElement: (el) => el.getBoundingClientRect().height ?? 24,
+    overscan: 25,
+  });
 
   return (
-    <div ref={containerRef} className={`${className} whitespace-pre-wrap`}>
-      {/* No virtual scroll because the app behaved smoothly even without it — tested on json-files over 40 000+ lines */}
-      {printedValue || <i>Select an item in the left panel</i>}
+    <div ref={containerRef} className="h-150 border-2 p-2 overflow-auto">
+      {data ? (
+        <div
+          className="p-2 whitespace-pre-wrap relative"
+          style={{ height: `${virtualizer.getTotalSize()}px` }}
+        >
+          {virtualizer.getVirtualItems().map(virtualRow => (
+            <div
+              key={virtualRow.key}
+              data-index={virtualRow.index}
+              ref={virtualizer.measureElement}
+              className="absolute top-0 left-0 w-full"
+              style={{ transform: `translateY(${virtualRow.start}px)` }}
+            >
+              <JsonLine compoundKey={structure[virtualRow.index]} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <i>Upload .json file to see the structure</i>
+      )}
     </div>
   );
-});
+}
 
-export default MemoizedDetailedView;
+export default DetailedView;
