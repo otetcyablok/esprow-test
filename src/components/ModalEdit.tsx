@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 
 import { useDataStore } from '@/store/store.ts';
 
-import Modal from '@/components/Modal.tsx';
+import Modal from '@/components/shared/Modal.tsx';
 import ValueInput from '@/components/ValueInput.tsx';
 
 function ModalEdit() {
