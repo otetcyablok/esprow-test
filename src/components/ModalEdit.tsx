@@ -8,19 +8,19 @@ import ValueInput from '@/components/ValueInput.tsx';
 
 function ModalEdit() {
   const currentEditedKey = useDataStore(state => state.currentEditedKey);
-  const storedValue = useDataStore(state => currentEditedKey ? state.getSpecificValue(currentEditedKey) : null);
+  const storedValue = useDataStore(state => currentEditedKey ? state.getSpecificValue(currentEditedKey) : undefined);
   const resetCurrentEditedKey = useDataStore(state => state.resetCurrentEditedKey);
   const saveValue = useDataStore(state => state.saveValue);
   const valueInputRef = useRef<ComponentRef<typeof ValueInput>>(null);
 
-  if (storedValue === null || currentEditedKey === null) return <></>;
+  if (storedValue === undefined || currentEditedKey === null) return <></>;
 
   const reset = () => resetCurrentEditedKey();
   const save = () => {
     const value = valueInputRef.current?.getValue();
 
-    console.log({ value });
-    if (value !== undefined) saveValue(currentEditedKey, value); // TODO: get value from somewhere
+    if (value !== undefined) saveValue(currentEditedKey, value);
+
     resetCurrentEditedKey();
   };
 

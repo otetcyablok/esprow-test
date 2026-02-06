@@ -23,5 +23,4 @@ Run following commands in project's main directory:
 
 ### TODOs:
 
-1. Self-made virtual scroll;
-2. Order the mess: TODOs in code.
+1. Self-made virtual scroll.

@@ -21,7 +21,7 @@ function DetailedView() {
   });
 
   return (
-    <div ref={containerRef} className="h-150 border-2 overflow-auto">
+    <div ref={containerRef} className="h-150 border-2 p-2 overflow-auto">
       {data ? (
         <div
           className="p-2 whitespace-pre-wrap relative"
@@ -40,9 +40,7 @@ function DetailedView() {
           ))}
         </div>
       ) : (
-        <div className="p-2">
-          <i>Upload .json file to see the structure</i>
-        </div>
+        <i>Upload .json file to see the structure</i>
       )}
     </div>
   );

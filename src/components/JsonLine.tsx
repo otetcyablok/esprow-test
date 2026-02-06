@@ -1,14 +1,16 @@
+import { memo } from 'react';
+
 import type { CompoundKey } from '@/types/structure.ts';
+import parseKey from '@/helpers/parse-key.ts';
 
 import EditableValue from '@/components/EditableStroke.tsx';
-import { memo } from 'react';
 
 type JsonLineProps = {
   compoundKey: CompoundKey;
 }
 
 const memoizedJsonLine = memo(function JsonLine({ compoundKey }: JsonLineProps) {
-  const [, key] = compoundKey.split('-');
+  const [, key] = parseKey(compoundKey);
 
   if (key === 'open' || key === 'close') {
     return (

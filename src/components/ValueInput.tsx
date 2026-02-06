@@ -29,7 +29,11 @@ const ValueInput = forwardRef<ValueInputHandle, ValueInputProps>(function ValueI
   };
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (e.code === 'Enter' && !e.shiftKey) {
-      saveValue(compoundKey, value);
+      const preparedValue = typeof initialValue === 'number' && !Number.isNaN(Number(value))
+        ? Number(value)
+        : value;
+
+      saveValue(compoundKey, preparedValue);
       resetCurrentEditedKey();
     } else if (e.code === 'Escape') {
       resetCurrentEditedKey();
@@ -80,7 +84,7 @@ const ValueInput = forwardRef<ValueInputHandle, ValueInputProps>(function ValueI
         />
       );
     default:
-      throw Error(`unexpected type of \`value\` ${typeof initialValue}`);
+      throw Error(`unexpected type of \`value\`: ${typeof initialValue}`);
   }
 });
 
