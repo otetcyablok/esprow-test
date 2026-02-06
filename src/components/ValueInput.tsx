@@ -1,5 +1,13 @@
 import { useDataStore } from '@/store/store.ts';
-import { type ChangeEvent, forwardRef, type KeyboardEvent, useImperativeHandle, useState } from 'react';
+import {
+  type ChangeEvent,
+  type KeyboardEvent,
+  forwardRef,
+  useImperativeHandle,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import type { PossibleValue } from '@/types/awaited-data.ts';
 import type { CompoundKey } from '@/types/structure.ts';
@@ -17,8 +25,18 @@ interface ValueInputProps {
 const ValueInput = forwardRef<ValueInputHandle, ValueInputProps>(function ValueInput({ initialValue, compoundKey }: ValueInputProps, ref) {
   const [value, setValue] = useState<PossibleValue>(initialValue);
 
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
   const saveValue = useDataStore(state => state.saveValue);
   const resetCurrentEditedKey = useDataStore(state => state.resetCurrentEditedKey);
+
+  useLayoutEffect(() => {
+    if (textareaRef?.current && typeof initialValue !== 'boolean') {
+      const element = textareaRef.current;
+      const length = String(value).length;
+      element.setSelectionRange(length, length);
+    }
+  }, []);
 
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const preparedValue = typeof value === 'boolean' && 'checked' in e.target
@@ -74,6 +92,7 @@ const ValueInput = forwardRef<ValueInputHandle, ValueInputProps>(function ValueI
     default:
       return (
         <textarea
+          ref={textareaRef}
           name="edit-value"
           value={value as string}
           onChange={onChange}
