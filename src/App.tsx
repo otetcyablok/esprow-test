@@ -12,7 +12,7 @@ function App() {
 
       <h2 className="text-xl font-bold text-center">JSON Data:</h2>
 
-      <DetailedView className="h-125 overflow-auto"/>
+      <DetailedView />
 
       <div className="flex justify-center mt-2">
         <DownloadButton />
