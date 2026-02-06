@@ -17,11 +17,11 @@ function DetailedView() {
     getScrollElement: () => containerRef.current,
     estimateSize: () => 24,
     measureElement: (el) => el.getBoundingClientRect().height ?? 24,
-    overscan: 10,
+    overscan: 25,
   });
 
   return (
-    <div ref={containerRef} className="h-125 border-2 overflow-auto">
+    <div ref={containerRef} className="h-150 border-2 overflow-auto">
       {data ? (
         <div
           className="p-2 whitespace-pre-wrap relative"
@@ -32,13 +32,8 @@ function DetailedView() {
               key={virtualRow.key}
               data-index={virtualRow.index}
               ref={virtualizer.measureElement}
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                transform: `translateY(${virtualRow.start}px)`,
-              }}
+              className="absolute top-0 left-0 w-full"
+              style={{ transform: `translateY(${virtualRow.start}px)` }}
             >
               <JsonLine compoundKey={structure[virtualRow.index]} />
             </div>
@@ -46,7 +41,7 @@ function DetailedView() {
         </div>
       ) : (
         <div className="p-2">
-          <i>Select an item in the left panel</i>
+          <i>Upload .json file to see the structure</i>
         </div>
       )}
     </div>

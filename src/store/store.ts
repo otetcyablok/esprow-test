@@ -24,7 +24,7 @@ const useDataStore = create<DataState>()((set, get) => ({
     const changedData = get().changedData;
     const [index, key] = compoundKey.split('-');
 
-    return changedData[compoundKey] || originalData[Number(index)][key];
+    return compoundKey in changedData ? changedData[compoundKey] : originalData[Number(index)][key];
   },
   saveValue: (compoundKey, value) => set((state) => {
     const changedData = {

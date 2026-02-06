@@ -25,4 +25,4 @@ Run following commands in project's main directory:
 
 1. Self-made virtual scroll;
 2. Editing in modal;
-3. Order the mess.
+3. Order the mess: TODOs in code.
