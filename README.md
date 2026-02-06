@@ -1,4 +1,4 @@
-# Esprow Test (JSON Tree Viewer)
+# Esprow Test (JSON Array Parser)
 
 Used technologies:
 
