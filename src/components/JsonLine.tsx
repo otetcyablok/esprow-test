@@ -1,30 +1,29 @@
 import { memo } from 'react';
 
-import type { CompoundKey } from '@/types/structure.ts';
+import type { JsonLine } from '@/types/structure.ts';
 import parseKey from '@/helpers/parse-key.ts';
 
 import EditableValue from '@/components/EditableStroke.tsx';
 
 type JsonLineProps = {
-  compoundKey: CompoundKey;
+  element: JsonLine;
 }
 
-const memoizedJsonLine = memo(function JsonLine({ compoundKey }: JsonLineProps) {
-  const [, key] = parseKey(compoundKey);
+const memoizedJsonLine = memo(function JsonLine({ element }: JsonLineProps) {
 
-  if (key === 'open' || key === 'close') {
+  if (element.structure) {
     return (
-      <div>
-        {key === 'open' ? '{' : '}'}{key === 'close' && ','}
-      </div>
+      <div>{element.value}{element.comma && ','}</div>
     );
   }
+
+  const [, key] = parseKey(element.value);
 
   return (
     <div className="pl-4 flex items-start justify-start">
       <div>{JSON.stringify(key)}</div>
       <div className="pr-2">:</div>
-      <EditableValue compoundKey={compoundKey} />
+      <EditableValue compoundKey={element.value} />
     </div>
   );
 });

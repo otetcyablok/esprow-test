@@ -7,13 +7,23 @@ export default function createStructure(data: AwaitedData[] | null): ViewerStruc
   if (!data) return result;
 
   for (let i = 0; i < data.length; i++) {
-    result.push(`${i}-open`);
+    result.push({
+      structure: true,
+      value: '{',
+    });
 
     for (const key in data[i]) {
-      result.push(`${i}-${key}`);
+      result.push({
+        structure: false,
+        value: `${i}-${key}`,
+      });
     }
 
-    result.push(`${i}-close`);
+    result.push({
+      structure: true,
+      comma: true,
+      value: '}',
+    });
   }
 
   return result;

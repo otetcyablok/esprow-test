@@ -35,7 +35,7 @@ function DetailedView() {
               className="absolute top-0 left-0 w-full"
               style={{ transform: `translateY(${virtualRow.start}px)` }}
             >
-              <JsonLine compoundKey={structure[virtualRow.index]} />
+              <JsonLine element={structure[virtualRow.index]} />
             </div>
           ))}
         </div>

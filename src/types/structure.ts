@@ -1,3 +1,16 @@
 export type CompoundKey = `${number}-${string}`;
+export type StructureSymbol = '{' | '}';
 
-export type ViewerStructure = CompoundKey[];
+export type StructureElement = {
+  structure: true;
+  comma?: boolean;
+  value: StructureSymbol;
+};
+export type KeyValueElement = {
+  structure: false;
+  comma?: boolean;
+  value: CompoundKey;
+}
+export type JsonLine = StructureElement | KeyValueElement;
+
+export type ViewerStructure = JsonLine[];
