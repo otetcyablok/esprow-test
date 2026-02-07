@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 
 import createStructure from '@/helpers/create-structure.ts';
@@ -19,6 +19,12 @@ function DetailedView() {
     measureElement: (el) => el.getBoundingClientRect().height ?? 24,
     overscan: 25,
   });
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = 0;
+    }
+  }, [data]);
 
   return (
     <div ref={containerRef} className="h-150 border-2 p-2 overflow-auto">
