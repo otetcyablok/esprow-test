@@ -16,7 +16,6 @@ function DetailedView() {
     count: structure.length,
     getScrollElement: () => containerRef.current,
     estimateSize: () => 24,
-    measureElement: (el) => el.getBoundingClientRect().height ?? 24,
     overscan: 25,
   });
 
@@ -37,7 +36,6 @@ function DetailedView() {
             <div
               key={virtualRow.key}
               data-index={virtualRow.index}
-              ref={virtualizer.measureElement}
               className="absolute top-0 left-0 w-full"
               style={{ transform: `translateY(${virtualRow.start}px)` }}
             >

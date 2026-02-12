@@ -12,7 +12,7 @@ function EditableStroke({ compoundKey }: EditableValueProps) {
   const startEditing = () => setCurrentEditedKey(compoundKey);
 
   return (
-    <div onClick={startEditing} className="cursor-pointer underline">
+    <div onClick={startEditing} className="cursor-pointer underline overflow-hidden text-ellipsis whitespace-nowrap">
       {JSON.stringify(storedValue)},
     </div>
   );
