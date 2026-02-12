@@ -1,4 +1,7 @@
-export type CompoundKey = `${number}-${string}`;
+export type CompoundKey = {
+  key: string;
+  index: number;
+}
 export type StructureSymbol = '{' | '}';
 
 export type StructureElement = {

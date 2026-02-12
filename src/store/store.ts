@@ -3,31 +3,29 @@ import { create } from 'zustand';
 import type { AwaitedData, PossibleValue } from '@/types/awaited-data.ts';
 import type { CompoundKey } from '@/types/structure.ts';
 
-import parseKey from '@/helpers/parse-key.ts';
-import typedEntries from '@/helpers/typed-entries.ts';
-
 interface DataState {
   data: AwaitedData[] | null;
   currentEditedKey: CompoundKey | null;
-  setCurrentEditedKey: (key: CompoundKey) => void;
+  setCurrentEditedKey: (compoundKey: CompoundKey) => void;
   resetCurrentEditedKey: () => void;
-  changedData: Record<CompoundKey, PossibleValue>
+  changedData: AwaitedData[],
   setData: (data: AwaitedData[]) => void;
   resetData: () => void;
   getSpecificValue: (compoundKey: CompoundKey) => PossibleValue | undefined;
   getChangedData: () => AwaitedData[];
-  saveValue: (key: CompoundKey, value: PossibleValue) => void;
+  saveValue: (compoundKey: CompoundKey, value: PossibleValue) => void;
 }
 
 const useDataStore = create<DataState>()((set, get) => ({
   data: null,
-  changedData: {},
+  changedData: [],
   currentEditedKey: null,
-  setCurrentEditedKey: (key) => set(() => ({ currentEditedKey: key })),
+  currentEditedIndex: null,
+  setCurrentEditedKey: (compoundKey) => set(() => ({ currentEditedKey: compoundKey })),
   resetCurrentEditedKey: () => set(() => ({ currentEditedKey: null })),
   setData: (data: AwaitedData[]) => set(() => ({
     data,
-    changedData: {},
+    changedData: [],
   })),
   resetData: () => set(() => ({ data: null })),
   getSpecificValue: (compoundKey) => {
@@ -35,16 +33,20 @@ const useDataStore = create<DataState>()((set, get) => ({
 
     if (!originalData) return undefined;
 
+    const { index, key } = compoundKey;
     const changedData = get().changedData;
-    const [strIndex, key] = parseKey(compoundKey);
 
-    return compoundKey in changedData ? changedData[compoundKey] : originalData[Number(strIndex)][key];
+    return changedData[index]?.[key] || originalData[index][key];
   },
   saveValue: (compoundKey, value) => set((state) => {
-    const changedData = {
-      ...state.changedData,
-      [compoundKey]: value,
-    };
+    const changedData = structuredClone(state.changedData);
+    const { index, key } = compoundKey;
+
+    if (!changedData[index]) {
+      changedData[index] = {};
+    }
+
+    changedData[index][key] = value;
 
     return { changedData };
   }),
@@ -52,10 +54,10 @@ const useDataStore = create<DataState>()((set, get) => ({
     const { data, changedData } = get();
     const originalData = data ? structuredClone(data) : [];
 
-    typedEntries(changedData).forEach(([compoundKey, value]) => {
-      const [strIndex, key] = parseKey(compoundKey);
-
-      originalData[Number(strIndex)][key] = value;
+    changedData.forEach((element, index) => {
+      for (const key in element) {
+        originalData[index][key] = element[key];
+      }
     });
 
     return originalData;

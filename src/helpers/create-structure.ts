@@ -7,16 +7,16 @@ export default function createStructure(data: AwaitedData[] | null): ViewerStruc
 
   if (!data) return result;
 
-  for (let i = 0; i < data.length; i++) {
+  for (let index = 0; index < data.length; index++) {
     result.push({
       structure: true,
       value: '{',
     });
 
-    for (const key in data[i]) {
+    for (const key in data[index]) {
       result.push({
         structure: false,
-        value: `${i}-${key}`,
+        value: { key, index },
       });
     }
 
