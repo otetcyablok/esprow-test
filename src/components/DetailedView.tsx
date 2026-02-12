@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 
 import createStructure from '@/helpers/create-structure.ts';
@@ -10,7 +10,7 @@ function DetailedView() {
   const containerRef = useRef<HTMLDivElement>(null);
   const data = useDataStore(state => state.data);
 
-  const structure = createStructure(data);
+  const structure = useMemo(() => createStructure(data), [data]);
 
   const virtualizer = useVirtualizer({
     count: structure.length,
